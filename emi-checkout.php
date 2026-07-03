@@ -3,7 +3,7 @@
  * Plugin Name:       EMI & Lead Checkout
  * Plugin URI:        https://example.com/
  * Description:
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            SM Devs
  * Author URI:        mailto:shahzaibahmed21.05.1998@gmail.com
  * Text Domain:       emi-checkout
