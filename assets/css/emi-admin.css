@@ -1,0 +1,45 @@
+/* EMI & Lead Checkout - admin (product edit) styles */
+
+.emicc-options .emicc-packages {
+	padding: 0 12px 8px;
+	margin-top: 6px;
+}
+
+.emicc-packages-label {
+	margin: 6px 0 8px;
+}
+
+.emicc-packages-table {
+	max-width: 640px;
+	margin-bottom: 8px;
+}
+
+.emicc-packages-table th,
+.emicc-packages-table td {
+	padding: 6px 8px;
+}
+
+.emicc-packages-table input[type="number"] {
+	width: 100%;
+}
+
+.emicc-packages-table .emicc-col-remove {
+	width: 36px;
+	text-align: center;
+}
+
+.emicc-packages-table .emicc-remove-package {
+	color: #b32d2e;
+	line-height: 1;
+	min-height: 28px;
+}
+
+.emicc-variation-packages {
+	margin: 12px 0 4px;
+	padding-top: 8px;
+	border-top: 1px solid #eee;
+}
+
+.emicc-variation-packages .emicc-packages-table {
+	max-width: 100%;
+}
