@@ -1,56 +1,80 @@
 # EMI & Lead Checkout (WooCommerce)
 
-Ek hi plugin me do features, khaas tor par Cement/retail store ke liye jahan online payment nahi chahiye, sirf leads + EMI plans chahiye.
+A single plugin with two core features, designed especially for cement and retail stores where **online payments are not required**—only customer leads and EMI plans.
 
 ## Features
 
-### 1) EMI Packages (per product, admin-defined)
+### 1) EMI Packages (Admin-defined per Product)
 
-- Har product ke **edit page → Product data → General** tab me **EMI Packages**.
-- **"+ Add Package"** se jitne chahe packages banayein. Har package me 3 fields:
+- On each product's **Edit Product → Product Data → General** tab, an **EMI Packages** section is available.
+- Click **"+ Add Package"** to create as many EMI plans as needed. Each package contains three fields:
   - **Months**
-  - **Downpayment** (us package ka apna downpayment)
+  - **Down Payment**
   - **Total Payment**
-- Regular price ki zaroorat nahi — product sirf in packages se purchasable ho jata hai. (Agar regular price set na ho to "From {lowest total}" price dikhega.)
-- Frontend (single product page) par har package ke liye automatically:
-  - `Monthly = (Total Payment − Downpayment) ÷ Months` (no interest — simple division).
-- Sirf package options dikhte hain (koi "No EMI" / regular-price option nahi). Pehla package default selected.
-- Package select karne par us package ki **total payment line item par set** ho jati hai (checkout Total reflect karta hai) aur **downpayment + monthly × months** breakdown cart/checkout/order me show hota hai.
+- A regular product price is **not required**. Products can be purchased using only the configured EMI packages. If no regular price is set, the storefront displays **"From {lowest total payment}"**.
+- On the single product page, every package automatically displays:
+  - `Monthly = (Total Payment − Down Payment) ÷ Months`
+- This is a simple installment calculation with **no interest**.
+- Only EMI package options are displayed (no regular purchase / "No EMI" option).
+- The first package is selected by default.
+- When a package is selected:
+  - The package's **Total Payment** becomes the product line item price.
+  - Cart, checkout, and order pages display the EMI breakdown:
+    - Down Payment
+    - Monthly Payment × Number of Months
 
-### 2) Payment-free "Lead" Checkout
+### 2) Payment-free Lead Checkout
 
-- Checkout par **koi payment method / payment box nahi**.
-- Customer standard WooCommerce **billing form** bharta hai (Naam, Phone, Email, Address, City, etc.).
-- "Submit Order" dabate hi order ban jata hai aur **WooCommerce → Orders** me normal order (status: *Processing*) ki tarah aa jata hai — yeh aapki **lead** hai.
-- Delivery = **shop pickup** (shipping fields/charges off).
-- Har aisa order par ek note + `_emicc_lead = yes` meta lagta hai taa-ke leads pehchaan saken.
+- The checkout page contains **no payment methods or payment section**.
+- Customers complete the standard WooCommerce billing form:
+  - Name
+  - Phone
+  - Email
+  - Address
+  - City
+  - Other billing details
+- Clicking **Submit Order** creates a normal WooCommerce order with the **Processing** status.
+- Orders appear under **WooCommerce → Orders** like standard WooCommerce orders and act as customer leads.
+- Delivery method is **Shop Pickup** only (shipping fields and shipping charges are disabled).
+- Every lead order automatically receives:
+  - An order note
+  - `_emicc_lead = yes` order meta for easy identification
 
 ### 3) Styling Settings
 
-- Admin sidebar me **EMI & Checkout** menu → styling options:
-  - Font size, Border radius
-  - Title color, Text color, Accent color (selected + amount)
-  - Box background, Option background, Border color, Hover border color
-- Yeh sab product page wale EMI box par live apply hote hain (CSS variables ke zariye).
+- A dedicated **EMI & Checkout** menu is added to the WordPress admin.
+- Customize the EMI box appearance using:
+  - Font Size
+  - Border Radius
+  - Title Color
+  - Text Color
+  - Accent Color (selected option & highlighted amounts)
+  - Box Background
+  - Option Background
+  - Border Color
+  - Hover Border Color
+- All styling is applied live using CSS variables.
 
 ## Installation
 
-1. Yeh folder `wp-content/plugins/` me rakhein (yahin hai).
-2. WordPress Admin → **Plugins** → **EMI & Lead Checkout** → *Activate*.
-3. WooCommerce active hona zaroori hai.
+1. Place this plugin inside `wp-content/plugins/`.
+2. Go to **WordPress Admin → Plugins**.
+3. Activate **EMI & Lead Checkout**.
+4. WooCommerce must already be installed and activated.
 
 ## Files
 
 ```
-emi-checkout.php                 Main bootstrap (constants, EMI calc helper, asset load)
-includes/class-emicc-emi.php     EMI: admin field, product display, cart/order meta
+emi-checkout.php                 Main bootstrap (constants, EMI helper, asset loading)
+includes/class-emicc-emi.php     EMI admin fields, frontend display, cart & order integration
 includes/class-emicc-checkout.php Payment-free lead checkout
 assets/css/emi-checkout.css      EMI UI styling
-assets/js/emi-checkout.js        Selected-plan highlight
+assets/js/emi-checkout.js        Selected package highlighting
 ```
 
 ## Notes
 
-- EMI sirf installment **information/plan** hai — koi paisa online charge nahi hota (poora store payment-free hai).
-- Original WooCommerce checkout hi use hota hai (sirf payment hata diya gaya), is liye orders normal tarah WooCommerce reports/admin me aate hain.
-- HPOS (High-Performance Order Storage) compatible.
+- EMI packages are for installment planning only. No online payments are collected.
+- The standard WooCommerce checkout is used with only the payment section removed.
+- Orders behave like normal WooCommerce orders and appear in reports and the admin dashboard.
+- Fully compatible with **WooCommerce HPOS (High-Performance Order Storage)**.
